@@ -1,28 +1,32 @@
-<h1><%= @neighbourhood.name %></h1>
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title mb-4"><%= @neighbourhood.name %></h1>
 
-<p><strong>Electoral Ward:</strong> <%= @neighbourhood.electoral_ward %></p>
-<p><strong>Total Sites:</strong> <%= @neighbourhood.sites.count %></p>
+    <p><strong>Electoral Ward:</strong> <%= @neighbourhood.electoral_ward %></p>
+    <p><strong>Total Sites:</strong> <%= @neighbourhood.sites.count %></p>
 
-<h2>Sites</h2>
+    <h2 class="mt-4">Sites</h2>
 
-<% @neighbourhood.sites.each do |site| %>
-  <p>
-    <strong>
-      <%= link_to(site.park.presence || site.street.presence || "View Site", site_path(site)) %>
-    </strong>
-    <br>
+    <% @neighbourhood.sites.each do |site| %>
+      <div class="border rounded p-3 mb-3">
+        <p class="mb-1">
+          <strong>
+            <%= link_to(site.park.presence || site.street.presence || "View Site", site_path(site)) %>
+          </strong>
+        </p>
 
-    <% if site.location_class.present? %>
-      Location Class: <%= site.location_class %><br>
+        <% if site.location_class.present? %>
+          <p class="mb-1"><strong>Location Class:</strong> <%= site.location_class %></p>
+        <% end %>
+
+        <% if site.property_type.present? %>
+          <p class="mb-1"><strong>Property Type:</strong> <%= site.property_type %></p>
+        <% end %>
+
+        <p class="mb-0"><strong>Trees at this site:</strong> <%= site.trees.count %></p>
+      </div>
     <% end %>
 
-    <% if site.property_type.present? %>
-      Property Type: <%= site.property_type %><br>
-    <% end %>
-
-    Trees at this site: <%= site.trees.count %>
-  </p>
-  <hr>
-<% end %>
-
-<p><%= link_to "Back to Neighbourhoods", neighbourhoods_path %></p>
+    <%= link_to "Back to Neighbourhoods", neighbourhoods_path, class: "btn btn-outline-success" %>
+  </div>
+</div>

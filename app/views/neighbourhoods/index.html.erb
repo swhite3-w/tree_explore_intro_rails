@@ -1,17 +1,19 @@
-<h1>Neighbourhoods</h1>
+<h1 class="mb-4">Neighbourhoods</h1>
 
-<% @neighbourhoods.each do |neighbourhood| %>
-  <p>
-    <strong>
-      <%= link_to neighbourhood.name, neighbourhood_path(neighbourhood) %>
-    </strong>
-    -
-    Electoral Ward: <%= neighbourhood.electoral_ward %>
-    -
-    Sites: <%= neighbourhood.sites.count %>
-  </p>
-<hr>
-<% end %>
+<div class="list-group mb-4">
+  <% @neighbourhoods.each do |neighbourhood| %>
+    <div class="list-group-item">
+      <h5 class="mb-1">
+        <%= link_to neighbourhood.name, neighbourhood_path(neighbourhood), class: "text-decoration-none" %>
+      </h5>
 
-<%= paginate @neighbourhoods %>
-<p><strong>Results:</strong> <%= @neighbourhoods.total_count %></p>
+      <p class="mb-1"><strong>Electoral Ward:</strong> <%= neighbourhood.electoral_ward %></p>
+      <p class="mb-0"><strong>Sites:</strong> <%= neighbourhood.sites.count %></p>
+    </div>
+  <% end %>
+</div>
+
+<div class="mt-3">
+  <%= paginate @neighbourhoods %>
+  <p class="mb-3"><strong>Results:</strong> <%= @neighbourhoods.total_count %></p>
+</div>

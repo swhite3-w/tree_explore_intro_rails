@@ -6,10 +6,12 @@
   their neighbourhoods, and site/location information.
 </p>
 
+<h2>Database Structure</h2>
 <p>
-  The database is organized into three related tables:
-  neighbourhoods, sites, and trees.
+  This application uses three related tables: neighbourhoods, sites, and trees.
+  A neighbourhood has many sites, and a site has many trees.
 </p>
+<%= image_tag "ERD.png", alt: "Entity Relationship Diagram", style: "max-width: 100%;" %>
 
 <p>
   A neighbourhood has many sites, and a site has many trees.

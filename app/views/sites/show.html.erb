@@ -15,3 +15,5 @@
 <% @site.trees.each do |tree| %>
   <p><%= link_to tree.common_name.presence || tree.botanical_name, tree_path(tree) %></p>
 <% end %>
+
+<p><%= link_to "Back to Sites", sites_path %></p>

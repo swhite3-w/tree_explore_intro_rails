@@ -1,2 +1,16 @@
-<h1>Neighbourhoods#index</h1>
-<p>Find me in app/views/neighbourhoods/index.html.erb</p>
+<h1>Neighbourhoods</h1>
+
+<% @neighbourhoods.each do |neighbourhood| %>
+  <p>
+    <strong>
+      <%= link_to neighbourhood.name, neighbourhood_path(neighbourhood) %>
+    </strong>
+    -
+    Electoral Ward: <%= neighbourhood.electoral_ward %>
+    -
+    Sites: <%= neighbourhood.sites.count %>
+  </p>
+<% end %>
+
+<%= paginate @neighbourhoods %>
+<p><strong>Results:</strong> <%= @neighbourhoods.total_count %></p>

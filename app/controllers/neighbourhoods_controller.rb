@@ -1,6 +1,8 @@
 class NeighbourhoodsController < ApplicationController
   def index
     @neighbourhoods = Neighbourhood.order(:name)
+                                  .page(params[:page])
+                                  .per(30)
   end
 
   def show

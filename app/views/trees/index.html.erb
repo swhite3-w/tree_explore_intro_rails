@@ -1,40 +1,59 @@
-<h1>Winnipeg Trees</h1>
+<h1 class="mb-4">Winnipeg Trees</h1>
 
-<%= form_with url: trees_path, method: :get, local: true do %>
-  <div>
-    <%= label_tag :search, "Search trees" %>
-    <%= text_field_tag :search, params[:search] %>
-    <%= link_to "Clear Filters", trees_path %>
-  </div>
+<div class="card mb-4">
+  <div class="card-body">
+    <%= form_with url: trees_path, method: :get, local: true do %>
+      <div class="row g-3 align-items-end">
+        <div class="col-md-5">
+          <%= label_tag :search, "Search trees", class: "form-label" %>
+          <%= text_field_tag :search, params[:search], class: "form-control" %>
+        </div>
 
-  <div>
-    <%= label_tag :neighbourhood_id, "Filter by neighbourhood" %>
-    <%= select_tag :neighbourhood_id,
-        options_from_collection_for_select(@neighbourhoods, :id, :name, params[:neighbourhood_id]),
-        include_blank: "All neighbourhoods" %>
-  </div>
+        <div class="col-md-5">
+          <%= label_tag :neighbourhood_id, "Filter by neighbourhood", class: "form-label" %>
+          <%= select_tag :neighbourhood_id,
+              options_from_collection_for_select(@neighbourhoods, :id, :name, params[:neighbourhood_id]),
+              include_blank: "All neighbourhoods",
+              class: "form-select" %>
+        </div>
 
-  <%= submit_tag "Search" %>
-<% end %>
+        <div class="col-md-2 d-grid">
+          <%= submit_tag "Search", class: "btn btn-success" %>
+        </div>
+      </div>
 
-<hr>
-
-<% @trees.each do |tree| %>
-  <p>
-    <strong><%= link_to(tree.common_name.presence || "Unnamed Tree", tree_path(tree)) %></strong>
-    <% if tree.botanical_name.present? %>
-      - <%= tree.botanical_name %>
+      <div class="mt-3">
+        <%= link_to "Clear Filters", trees_path, class: "btn btn-outline-secondary btn-sm" %>
+      </div>
     <% end %>
-    <br>
+  </div>
+</div>
 
-    Site:
-    <%= link_to(tree.site.park.presence || tree.site.street.presence || "View Site", site_path(tree.site)) %>
-    |
-    Neighbourhood:
-    <%= link_to tree.site.neighbourhood.name, neighbourhood_path(tree.site.neighbourhood) %>
-  </p>
-<hr>
-<% end %>
+<div class="list-group mb-4">
+  <% @trees.each do |tree| %>
+    <div class="list-group-item">
+      <h5 class="mb-1">
+        <%= link_to(tree.common_name.presence || "Unnamed Tree", tree_path(tree), class: "text-decoration-none") %>
+      </h5>
 
-<%= paginate @trees %>
-<p><strong>Results:</strong> <%= @trees.total_count %></p>
+      <% if tree.botanical_name.present? %>
+        <p class="mb-1"><strong>Botanical Name:</strong> <%= tree.botanical_name %></p>
+      <% end %>
+
+      <p class="mb-1">
+        <strong>Site:</strong>
+        <%= link_to(tree.site.park.presence || tree.site.street.presence || "View Site", site_path(tree.site)) %>
+      </p>
+
+      <p class="mb-0">
+        <strong>Neighbourhood:</strong>
+        <%= link_to tree.site.neighbourhood.name, neighbourhood_path(tree.site.neighbourhood) %>
+      </p>
+    </div>
+  <% end %>
+</div>
+
+<div class="mt-3">
+  <%= paginate @trees %>
+  <p class="mb-3"><strong>Results:</strong> <%= @trees.total_count %></p>
+</div>

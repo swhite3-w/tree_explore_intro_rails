@@ -1,19 +1,36 @@
-<h1><%= @site.park.presence || "Site Details" %></h1>
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title mb-4"><%= @site.park.presence || @site.street.presence || "Site Details" %></h1>
 
-<p><strong>Neighbourhood:</strong>
-  <%= link_to @site.neighbourhood.name, neighbourhood_path(@site.neighbourhood) %>
-</p>
+    <p>
+      <strong>Neighbourhood:</strong>
+      <%= link_to @site.neighbourhood.name, neighbourhood_path(@site.neighbourhood) %>
+    </p>
 
-<p><strong>Location Class:</strong> <%= @site.location_class %></p>
-<p><strong>Property Type:</strong> <%= @site.property_type %></p>
-<p><strong>Street:</strong> <%= @site.street %></p>
-<p><strong>From:</strong> <%= @site.street_from %></p>
-<p><strong>To:</strong> <%= @site.street_to %></p>
+    <p><strong>Location Class:</strong> <%= @site.location_class %></p>
+    <p><strong>Property Type:</strong> <%= @site.property_type %></p>
 
-<h2>Trees at this Site</h2>
+    <% if @site.street.present? %>
+      <p><strong>Street:</strong> <%= @site.street %></p>
+    <% end %>
 
-<% @site.trees.each do |tree| %>
-  <p><%= link_to tree.common_name.presence || tree.botanical_name, tree_path(tree) %></p>
-<% end %>
+    <% if @site.street_from.present? || @site.street_to.present? %>
+      <p>
+        <strong>Street Range:</strong>
+        <%= @site.street_from.presence || "N/A" %> to <%= @site.street_to.presence || "N/A" %>
+      </p>
+    <% end %>
 
-<p><%= link_to "Back to Sites", sites_path %></p>
+    <h2 class="mt-4">Trees at this Site</h2>
+
+    <ul class="list-group mb-3">
+      <% @site.trees.each do |tree| %>
+        <li class="list-group-item">
+          <%= link_to(tree.common_name.presence || tree.botanical_name || "Unnamed Tree", tree_path(tree)) %>
+        </li>
+      <% end %>
+    </ul>
+
+    <%= link_to "Back to Sites", sites_path, class: "btn btn-outline-success" %>
+  </div>
+</div>

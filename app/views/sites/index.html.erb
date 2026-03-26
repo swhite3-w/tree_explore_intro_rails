@@ -1,24 +1,29 @@
-<h1>Sites</h1>
+<h1 class="mb-4">Sites</h1>
 
-<% @sites.each do |site| %>
-  <p>
-    <strong>
-      <%= link_to(site.park.presence || site.street.presence || "View Site", site_path(site)) %>
-    </strong>
-    <br>
+<div class="list-group mb-4">
+  <% @sites.each do |site| %>
+    <div class="list-group-item">
+      <h5 class="mb-1">
+        <%= link_to(site.park.presence || site.street.presence || "View Site", site_path(site), class: "text-decoration-none") %>
+      </h5>
 
-    Neighbourhood:
-    <%= link_to site.neighbourhood.name, neighbourhood_path(site.neighbourhood) %>
-    <br>
+      <p class="mb-1">
+        <strong>Neighbourhood:</strong>
+        <%= link_to site.neighbourhood.name, neighbourhood_path(site.neighbourhood) %>
+      </p>
 
-    Location Class: <%= site.location_class %>
-    <% if site.property_type.present? %>
-      | Property Type: <%= site.property_type %>
-    <% end %>
-  </p>
+      <% if site.location_class.present? %>
+        <p class="mb-1"><strong>Location Class:</strong> <%= site.location_class %></p>
+      <% end %>
 
-  <hr>
-<% end %>
+      <% if site.property_type.present? %>
+        <p class="mb-0"><strong>Property Type:</strong> <%= site.property_type %></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 
-<%= paginate @sites %>
-<p><strong>Results:</strong> <%= @sites.total_count %></p>
+<div class="mt-3">
+  <%= paginate @sites %>
+  <p class="mb-3"><strong>Results:</strong> <%= @sites.total_count %></p>
+</div>

@@ -1,10 +1,26 @@
-<nav>
-  <%= link_to "Trees", trees_path %> |
-  <%= link_to "Sites", sites_path %> |
-  <%= link_to "Neighbourhoods", neighbourhoods_path %> |
-  <%= link_to "About", about_path %>
-</nav>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Winnipeg Tree Explorer</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<hr>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-<%= yield %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <nav>
+      <%= link_to "Trees", trees_path %> |
+      <%= link_to "Sites", sites_path %> |
+      <%= link_to "Neighbourhoods", neighbourhoods_path %> |
+      <%= link_to "About", about_path %>
+    </nav>
+
+    <hr>
+
+    <%= yield %>
+  </body>
+</html>

@@ -3,9 +3,9 @@
 <div class="list-group mb-4">
   <% @sites.each do |site| %>
     <div class="list-group-item">
-      <h5 class="mb-1">
+      <h2 class="h5 mb-1">
         <%= link_to(site.park.presence || site.street.presence || "View Site", site_path(site), class: "text-decoration-none") %>
-      </h5>
+      </h2>
 
       <p class="mb-1">
         <strong>Neighbourhood:</strong>

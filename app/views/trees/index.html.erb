@@ -32,9 +32,9 @@
 <div class="list-group mb-4">
   <% @trees.each do |tree| %>
     <div class="list-group-item">
-      <h5 class="mb-1">
+      <h2 class="h5 mb-1">
         <%= link_to(tree.common_name.presence || "Unnamed Tree", tree_path(tree), class: "text-decoration-none") %>
-      </h5>
+      </h2>
 
       <% if tree.botanical_name.present? %>
         <p class="mb-1"><strong>Botanical Name:</strong> <%= tree.botanical_name %></p>

@@ -1,2 +1,17 @@
-<h1>Trees#show</h1>
-<p>Find me in app/views/trees/show.html.erb</p>
+<h1><%= @tree.common_name.presence || "Unnamed Tree" %></h1>
+
+<p><strong>Botanical Name:</strong> <%= @tree.botanical_name %></p>
+<p><strong>Diameter at Breast Height:</strong> <%= @tree.diameter_at_breast_height %></p>
+<p><strong>Tree ID:</strong> <%= @tree.tree_id_external %></p>
+
+<% if @tree.ded_tag_number.present? %>
+  <p><strong>DED Tag Number:</strong> <%= @tree.ded_tag_number %></p>
+<% end %>
+
+<p><strong>Neighbourhood:</strong>
+  <%= link_to @tree.site.neighbourhood.name, neighbourhood_path(@tree.site.neighbourhood) %>
+</p>
+
+<p><strong>Site:</strong>
+  <%= link_to(@tree.site.park.presence || @tree.site.street, site_path(@tree.site)) %>
+</p>

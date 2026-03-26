@@ -1,2 +1,29 @@
-<h1>Trees#index</h1>
-<p>Find me in app/views/trees/index.html.erb</p>
+<h1>Winnipeg Trees</h1>
+
+<%= form_with url: trees_path, method: :get, local: true do %>
+  <div>
+    <%= label_tag :search, "Search trees" %>
+    <%= text_field_tag :search, params[:search] %>
+  </div>
+
+  <div>
+    <%= label_tag :neighbourhood_id, "Filter by neighbourhood" %>
+    <%= select_tag :neighbourhood_id,
+        options_from_collection_for_select(@neighbourhoods, :id, :name, params[:neighbourhood_id]),
+        include_blank: "All neighbourhoods" %>
+  </div>
+
+  <%= submit_tag "Search" %>
+<% end %>
+
+<hr>
+
+<% @trees.each do |tree| %>
+  <p>
+    <%= link_to tree.common_name.presence || tree.botanical_name, tree_path(tree) %>
+    -
+    <%= tree.botanical_name %>
+    -
+    <%= link_to tree.site.neighbourhood.name, neighbourhood_path(tree.site.neighbourhood) %>
+  </p>
+<% end %>

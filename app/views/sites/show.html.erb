@@ -1,2 +1,17 @@
-<h1>Sites#show</h1>
-<p>Find me in app/views/sites/show.html.erb</p>
+<h1><%= @site.park.presence || "Site Details" %></h1>
+
+<p><strong>Neighbourhood:</strong>
+  <%= link_to @site.neighbourhood.name, neighbourhood_path(@site.neighbourhood) %>
+</p>
+
+<p><strong>Location Class:</strong> <%= @site.location_class %></p>
+<p><strong>Property Type:</strong> <%= @site.property_type %></p>
+<p><strong>Street:</strong> <%= @site.street %></p>
+<p><strong>From:</strong> <%= @site.street_from %></p>
+<p><strong>To:</strong> <%= @site.street_to %></p>
+
+<h2>Trees at this Site</h2>
+
+<% @site.trees.each do |tree| %>
+  <p><%= link_to tree.common_name.presence || tree.botanical_name, tree_path(tree) %></p>
+<% end %>

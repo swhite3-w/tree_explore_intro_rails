@@ -1,6 +1,9 @@
 class SitesController < ApplicationController
   def index
-    @sites = Site.includes(:neighbourhood).order(:street)
+    @sites = Site.includes(:neighbourhood)
+                 .order(:street)
+                 .page(params[:page])
+                 .per(25)
   end
 
   def show

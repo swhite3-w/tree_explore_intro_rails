@@ -1,2 +1,24 @@
-<h1>Sites#index</h1>
-<p>Find me in app/views/sites/index.html.erb</p>
+<h1>Sites</h1>
+
+<% @sites.each do |site| %>
+  <p>
+    <strong>
+      <%= link_to(site.park.presence || site.street.presence || "View Site", site_path(site)) %>
+    </strong>
+    <br>
+
+    Neighbourhood:
+    <%= link_to site.neighbourhood.name, neighbourhood_path(site.neighbourhood) %>
+    <br>
+
+    Location Class: <%= site.location_class %>
+    <% if site.property_type.present? %>
+      | Property Type: <%= site.property_type %>
+    <% end %>
+  </p>
+
+  <hr>
+<% end %>
+
+<%= paginate @sites %>
+<p><strong>Results:</strong> <%= @sites.total_count %></p>

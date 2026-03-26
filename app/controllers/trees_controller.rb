@@ -14,7 +14,7 @@ class TreesController < ApplicationController
                      .where(neighbourhoods: { id: params[:neighbourhood_id] })
     end
 
-    @trees = @trees.order(:common_name)
+    @trees = @trees.order(:common_name).page(params[:page]).per(25)
   end
 
   def show

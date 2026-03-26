@@ -4,6 +4,7 @@
   <div>
     <%= label_tag :search, "Search trees" %>
     <%= text_field_tag :search, params[:search] %>
+    <%= link_to "Clear Filters", trees_path %>
   </div>
 
   <div>
@@ -20,12 +21,19 @@
 
 <% @trees.each do |tree| %>
   <p>
-    <%= link_to tree.common_name.presence || tree.botanical_name, tree_path(tree) %>
-    -
-    <%= tree.botanical_name %>
-    -
+    <strong><%= link_to(tree.common_name.presence || "Unnamed Tree", tree_path(tree)) %></strong>
+    <% if tree.botanical_name.present? %>
+      - <%= tree.botanical_name %>
+    <% end %>
+    <br>
+
+    Site:
+    <%= link_to(tree.site.park.presence || tree.site.street.presence || "View Site", site_path(tree.site)) %>
+    |
+    Neighbourhood:
     <%= link_to tree.site.neighbourhood.name, neighbourhood_path(tree.site.neighbourhood) %>
   </p>
 <% end %>
 
 <%= paginate @trees %>
+<p><strong>Results:</strong> <%= @trees.total_count %></p>

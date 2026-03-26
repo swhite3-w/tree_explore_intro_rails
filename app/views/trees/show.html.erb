@@ -8,10 +8,27 @@
   <p><strong>DED Tag Number:</strong> <%= @tree.ded_tag_number %></p>
 <% end %>
 
-<p><strong>Neighbourhood:</strong>
+<p>
+  <strong>Neighbourhood:</strong>
   <%= link_to @tree.site.neighbourhood.name, neighbourhood_path(@tree.site.neighbourhood) %>
 </p>
 
-<p><strong>Site:</strong>
-  <%= link_to(@tree.site.park.presence || @tree.site.street, site_path(@tree.site)) %>
+<p>
+  <strong>Site:</strong>
+  <%= link_to(@tree.site.park.presence || @tree.site.street.presence || "View Site", site_path(@tree.site)) %>
 </p>
+
+<p><strong>Location Class:</strong> <%= @tree.site.location_class %></p>
+<p><strong>Property Type:</strong> <%= @tree.site.property_type %></p>
+
+<% if @tree.site.street.present? %>
+  <p>
+    <strong>Street:</strong>
+    <%= @tree.site.street %>
+    <% if @tree.site.street_from.present? || @tree.site.street_to.present? %>
+      (<%= @tree.site.street_from %> to <%= @tree.site.street_to %>)
+    <% end %>
+  </p>
+<% end %>
+
+<p><%= link_to "Back to Trees", trees_path %></p>

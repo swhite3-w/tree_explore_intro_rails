@@ -1,47 +1,41 @@
-<h1>About Winnipeg Tree Explorer</h1>
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title mb-4">About Winnipeg Tree Explorer</h1>
 
-<p>
-  Winnipeg Tree Explorer is a Ruby on Rails application that allows users to explore
-  the City of Winnipeg Tree Inventory dataset. The dataset contains detailed information
-  about trees located throughout the city, including species, size, and location data.
-</p>
+    <p>
+      Winnipeg Tree Explorer is a Ruby on Rails application that allows users to explore
+      the City of Winnipeg Tree Inventory dataset. The dataset contains detailed information
+      about trees located throughout the city, including species, size, and location data.
+    </p>
 
-<h2>Dataset</h2>
-<p>
-  The data used in this application comes from the City of Winnipeg Open Data portal.
-  It includes information such as:
-</p>
+    <h2 class="mt-4">Dataset</h2>
+    <p>The data used in this application comes from the City of Winnipeg Open Data portal. It includes information such as:</p>
 
-<ul>
-  <li>Common and botanical tree names</li>
-  <li>Tree size (diameter at breast height)</li>
-  <li>Neighbourhood and electoral ward</li>
-  <li>Site and location details (street, park, property type)</li>
-  <li>Geographic coordinates</li>
-</ul>
+    <ul>
+      <li>Common and botanical tree names</li>
+      <li>Tree size (diameter at breast height)</li>
+      <li>Neighbourhood and electoral ward</li>
+      <li>Site and location details</li>
+      <li>Geographic coordinates</li>
+    </ul>
 
-<h2>Database Structure</h2>
-<p>
-  The application uses three related tables to organize the data:
-</p>
+    <h2 class="mt-4">Database Structure</h2>
+    <p>The application uses three related tables to organize the data:</p>
 
-<ul>
-  <li><strong>Neighbourhoods</strong> – stores neighbourhood names and electoral wards</li>
-  <li><strong>Sites</strong> – stores location details and belongs to a neighbourhood</li>
-  <li><strong>Trees</strong> – stores tree-specific data and belongs to a site</li>
-</ul>
+    <ul>
+      <li><strong>Neighbourhoods</strong> – stores neighbourhood names and electoral wards</li>
+      <li><strong>Sites</strong> – stores location details and belongs to a neighbourhood</li>
+      <li><strong>Trees</strong> – stores tree-specific data and belongs to a site</li>
+    </ul>
 
-<p>
-  A neighbourhood has many sites, and a site has many trees. This structure allows
-  the application to display hierarchical relationships between data and supports
-  navigation from trees to their associated sites and neighbourhoods.
-</p>
+    <p>
+      A neighbourhood has many sites, and a site has many trees. This structure allows
+      the application to display hierarchical relationships between data and supports
+      navigation from trees to their associated sites and neighbourhoods.
+    </p>
 
-<h2>Entity Relationship Diagram</h2>
+    <h2 class="mt-4">Entity Relationship Diagram</h2>
 
-<%= image_tag "ERD.png", alt: "Entity Relationship Diagram", style: "max-width: 100%;" %>
-
-<p>
-  The diagram above illustrates the relationships between the three main tables
-  used in this application.
-</p>
+    <%= image_tag "ERD.png", alt: "Entity Relationship Diagram", class: "img-fluid border rounded" %>
+  </div>
+</div>
